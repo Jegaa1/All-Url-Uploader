@@ -64,6 +64,21 @@ async def Gthumb02(bot, update, duration, download_directory):
 
     return thumbnail
 
+async def Mdata01(download_directory):
+          width = 0
+          height = 0
+          duration = 0
+          metadata = extractMetadata(createParser(download_directory))
+          if metadata is not None:
+              if metadata.has("duration"):
+                  duration = metadata.get('duration').seconds
+              if metadata.has("width"):
+                  width = metadata.get("width")
+              if metadata.has("height"):
+                  height = metadata.get("height")
+
+          return width, height, duration
+
 @Client.on_message(filters.command("delthumb") & filters.incoming & filters.private)
 async def delete_photo(bot, message):
     download_location = f"{Config.DOWNLOAD_LOCATION}/{message.from_user.id}.jpg"
