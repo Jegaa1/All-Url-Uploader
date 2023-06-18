@@ -54,6 +54,15 @@ async def send_photo(bot, message):
     else:
         await message.reply_text(text="you don't have set thumbnail yet!. send .jpg img to save as thumbnail.", quote=True)
 
+async def Gthumb02(bot, update, duration, download_directory):
+    thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
+    db_thumbnail = await clinton.get_thumbnail(update.from_user.id)
+    if db_thumbnail is not None:
+        thumbnail = await bot.download_media(message=db_thumbnail, file_name=thumb_image_path)
+    else:
+        thumbnail = await take_screen_shot(download_directory, os.path.dirname(download_directory), random.randint(0, duration - 1))
+
+    return thumbnail
 
 @Client.on_message(filters.command("delthumb") & filters.incoming & filters.private)
 async def delete_photo(bot, message):
