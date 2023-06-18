@@ -117,6 +117,8 @@ async def ddl_call_back(bot, update):  # sourcery skip: low-code-quality
 
         else:
             start_time = time.time()
+            width, duration = await Mdata02(download_directory)
+            thumbnail = await Gthumb02(bot, update, duration, download_directory)
             if tg_send_type == "video":
                 width, height, duration = await Mdata01(download_directory)
                 await bot.send_video(chat_id=update.message.chat.id, video=download_directory, thumb=thumb, caption=description, duration=duration, width=width, height=height, supports_streaming=True, reply_to_message_id=update.message.reply_to_message.id, progress=progress_for_pyrogram, progress_args=(Translation.UPLOAD_START, update.message, custom_file_name, start_time))
