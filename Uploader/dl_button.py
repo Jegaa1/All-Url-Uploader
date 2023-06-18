@@ -119,7 +119,7 @@ async def ddl_call_back(bot, update):  # sourcery skip: low-code-quality
             start_time = time.time()
             if tg_send_type == "video":
                 width, height, duration = await Mdata01(download_directory)
-                await bot.send_video(chat_id=update.message.chat.id, video=download_directory, thumb=thumb, caption=description, duration=duration, width=width, height=height, supports_streaming=True, reply_to_message_id=update.message.reply_to_message.id, progress=progress_for_pyrogram, progress_args=(Translation.UPLOAD_START, update.message, start_time))
+                await bot.send_video(chat_id=update.message.chat.id, video=download_directory, thumb=thumb, caption=custom_file_name, duration=duration, width=width, height=height, supports_streaming=True, reply_to_message_id=update.message.reply_to_message.id, progress=progress_for_pyrogram, progress_args=(Translation.UPLOAD_START, update.message, start_time))
 
             elif tg_send_type == "audio":
                 duration = await Mdata03(download_directory)
